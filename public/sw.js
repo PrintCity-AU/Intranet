@@ -1,6 +1,7 @@
 // Service worker: makes the app installable and keeps the last-seen pages readable when the wifi drops out.
-const CACHE = 'pc-intranet-v1';
-const SHELL = ['/', '/css/app.css', '/js/app.js', '/js/ui.js', '/js/router.js', '/js/schema.js', '/vendor/qrcode.js', '/icons/icon.svg', '/manifest.webmanifest',
+const CACHE = 'pc-intranet-v3';
+const SHELL = ['/', '/css/app.css', '/js/app.js', '/js/ui.js', '/js/router.js', '/js/schema.js', '/vendor/qrcode.js', '/icons/icon.svg', '/brand/logo-light.svg', '/brand/logo-dark.svg', '/fonts/figtree-latin-500-normal.woff2', '/fonts/figtree-latin-700-normal.woff2',
+  ...['M001', 'M003', 'M004', 'M008', 'M009', 'M013', 'M015', 'M016', 'M026'].map((c) => `/signs/${c}.svg`), '/manifest.webmanifest',
   '/js/views/dashboard.js', '/js/views/machines.js', '/js/views/training.js', '/js/views/safety.js', '/js/views/people.js', '/js/views/register.js'];
 
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())); });

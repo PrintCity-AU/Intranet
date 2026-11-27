@@ -1,12 +1,12 @@
 {
-  "name": "PrintCity Intranet",
-  "short_name": "PrintCity",
-  "description": "Safety, machinery, training and team information for PrintCity staff.",
+  "name": "Print City Intranet",
+  "short_name": "Print City",
+  "description": "Safety, machinery, training and team information for Print City staff.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f4f5f7",
-  "theme_color": "#14213d",
+  "background_color": "#f3f5f6",
+  "theme_color": "#062637",
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },

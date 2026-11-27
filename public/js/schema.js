@@ -2,17 +2,17 @@
 // Adding a field here needs a matching column in src/migrations.js.
 
 export const PPE = {
-  glasses: { label: 'Safety glasses', icon: '🥽' },
-  hearing: { label: 'Hearing protection', icon: '🎧' },
-  boots: { label: 'Safety footwear', icon: '🥾' },
-  gloves: { label: 'Gloves', icon: '🧤' },
-  cut_gloves: { label: 'Cut-resistant gloves', icon: '🧤' },
-  hivis: { label: 'Hi-vis clothing', icon: '🦺' },
-  mask: { label: 'Dust mask / respirator', icon: '😷' },
-  face: { label: 'Face shield', icon: '🛡️' },
-  apron: { label: 'Apron', icon: '🧥' },
-  hair: { label: 'Long hair tied back', icon: '💇' },
-  no_loose: { label: 'No loose clothing or jewellery', icon: '🚫' },
+  glasses: { label: 'Safety glasses', sign: 'M004' },
+  hearing: { label: 'Hearing protection', sign: 'M003' },
+  boots: { label: 'Safety footwear', sign: 'M008' },
+  gloves: { label: 'Gloves', sign: 'M009' },
+  cut_gloves: { label: 'Cut-resistant gloves', sign: 'M009' },
+  hivis: { label: 'Hi-vis clothing', sign: 'M015' },
+  mask: { label: 'Dust mask / respirator', sign: 'M016' },
+  face: { label: 'Face shield', sign: 'M013' },
+  apron: { label: 'Apron', sign: 'M026' },
+  hair: { label: 'Long hair tied back', sign: 'M001' },
+  no_loose: { label: 'No loose clothing or jewellery', sign: 'M001' },
 };
 
 export const ROLES = ['staff', 'manager', 'admin'];
