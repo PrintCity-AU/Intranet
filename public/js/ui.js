@@ -65,7 +65,7 @@ export const statusBadge = (s) => (s ? badge(s, STATUS_CLS[s] || 'mid') : '');
 export function riskBadge(row) { const r = riskRating(row.likelihood, row.consequence); return r ? badge(`${r.label} risk`, r.cls) : ''; }
 export function ppeBadges(list) {
   if (!list?.length) return '<p class="muted">None listed.</p>';
-  return `<div class="ppe">${list.filter((k) => PPE[k]).map((k) => `<div class="ppe-item"><span class="ppe-icon">${PPE[k].icon}</span><span>${esc(PPE[k].label)}</span></div>`).join('')}</div>`;
+  return `<div class="ppe">${list.filter((k) => PPE[k]).map((k) => `<div class="ppe-item"><img class="ppe-icon" src="/signs/${PPE[k].sign}.svg" alt="" width="64" height="64"><span>${esc(PPE[k].label)}</span></div>`).join('')}</div>`;
 }
 
 // Safe, minimal Markdown: headings, lists, bold, italics, links and "> " warning boxes.
@@ -157,7 +157,7 @@ export function formHtml(fields, v = {}, { submit = 'Save' } = {}) {
         if (f.mgrPick && !mgr) return '';
         input = `<select ${name} ${req}>${userOptions(val ?? (f.mgrPick ? state.me.id : null))}</select>`; break;
       case 'machine': input = `<select ${name}>${machineOptions(val)}</select>`; break;
-      case 'ppe': input = `<div class="ppe-pick">${Object.entries(PPE).map(([k, p]) => `<label class="check"><input type="checkbox" data-ppe="${f.k}" value="${k}" ${(val || []).includes(k) ? 'checked' : ''}> ${p.icon} ${esc(p.label)}</label>`).join('')}</div>`; break;
+      case 'ppe': input = `<div class="ppe-pick">${Object.entries(PPE).map(([k, p]) => `<label class="check"><input type="checkbox" data-ppe="${f.k}" value="${k}" ${(val || []).includes(k) ? 'checked' : ''}> <img class="ppe-mini" src="/signs/${p.sign}.svg" alt="" width="28" height="28"> ${esc(p.label)}</label>`).join('')}</div>`; break;
       case 'file': case 'files': {
         const files = Array.isArray(val) ? val : val ? [val] : [];
         input = `<div class="uploader" data-upload="${f.k}" data-multi="${f.type === 'files'}"><div data-list>${files.map(fileChip).join('')}</div>
