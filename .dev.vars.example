@@ -1,0 +1,3 @@
+# Local testing only. Copy to .dev.vars. Never set DEV_USER_EMAIL on the live site.
+DEV_USER_EMAIL=admin@example.com
+ADMIN_EMAILS=admin@example.com
