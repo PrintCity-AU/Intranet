@@ -26,14 +26,14 @@ export async function dashboard(el) {
 
   el.innerHTML = `<div class="page-head"><h1>G'day ${esc(first)}</h1></div>
     <div class="quick">
-      <a class="button big warnbtn" href="#/hazards/new">⚠️ Report a hazard or near miss</a>
-      <a class="button big" href="#/machines">⚙️ Machinery and procedures</a>
-      <a class="button big" href="#/emergency">🚨 Emergency info</a>
+      <a class="button big warnbtn" href="#/hazards/new">Report a hazard or near miss</a>
+      <a class="button big" href="#/machines">Machinery and procedures</a>
+      <a class="button big" href="#/emergency">Emergency info</a>
     </div>
     ${d.machinesDown.length ? `<div class="alert bad"><strong>Machines not fully available:</strong> ${d.machinesDown.map((m) => `<a href="#/machines/${m.id}">${esc(m.name)}</a> (${esc(m.status.toLowerCase())})`).join(', ')}</div>` : ''}
     ${mgr ? `<div class="stats">${stats.map(([label, n, href, cls]) => `<a class="stat ${cls}" href="${href}"><strong>${n}</strong><span>${label}</span></a>`).join('')}</div>` : ''}
     <div class="panels">
-    ${d.notices.length ? panel('Noticeboard', 0, d.notices.map((n) => `<article class="notice"><h3>${n.pinned ? '📌 ' : ''}${esc(n.title)}</h3>${md(n.body)}<p class="muted small">${fmtDate(n.created_at)} · ${esc(userName(n.created_by))}</p></article>`).join(''), { href: '#/notices', cls: 'span2' }) : ''}
+    ${d.notices.length ? panel('Noticeboard', 0, d.notices.map((n) => `<article class="notice"><h3>${n.pinned ? '<span class="tag-pin">Pinned</span>' : ''}${esc(n.title)}</h3>${md(n.body)}<p class="muted small">${fmtDate(n.created_at)} · ${esc(userName(n.created_by))}</p></article>`).join(''), { href: '#/notices', cls: 'span2' }) : ''}
 
     ${panel('My to-do list', todo.length + myActions.length + d.policiesToRead.length,
       [...myActions.map((a) => item(`#/actions/${a.id}`, a.title, 'Corrective action', dueBadge(a.due_date, 7))),

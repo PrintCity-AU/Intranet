@@ -89,7 +89,8 @@ Pages project, **Custom domains**, **Set up a domain**, for example `intranet.yo
 - **Sign-off rule**: nobody can sign off their own training, and a "competent" sign-off needs every practical check ticked plus the observer's confirmation. Records are never deleted, only revoked with a reason.
 - **Retraining**: raise a module's version number and every existing sign-off for it shows as "Retraining required".
 - **Reminders** show on the dashboard. Email reminders are not built yet.
-- **Changing colours or the name**: the colours are at the top of `public/css/app.css`.
+- **Branding**: colours follow the Print City Style Guide and live at the top of `public/css/app.css`. Logos are in `public/brand/` (light logo on dark backgrounds, dark logo on light). The red, amber and green safety colours are deliberately separate from the brand colours, so do not swap them for brand blues.
+- **Font**: the brand font, Degular, is a paid font, so the site uses Figtree (free, similar shape) from `public/fonts/`. If you have a Degular web licence, the comment at the top of `app.css` says how to switch.
 - **Adding a field to a register**: add it to `public/js/schema.js`. The database column is added automatically on the next request.
 - **Backups**: D1 keeps 30 days of point-in-time recovery (Time Travel). For your own copy, managers can use the **Export** button on each register.
 - The procedure, training and quiz content has to come from you: the manufacturer's manual, your risk assessments and how the job is done on your floor. The app holds and enforces it; it does not write it.

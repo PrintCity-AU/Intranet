@@ -97,7 +97,7 @@ export function fileLinks(v) {
   const imgs = files.filter((f) => /^image\//.test(f.type || ''));
   const docs = files.filter((f) => !/^image\//.test(f.type || ''));
   return `<div class="files">${imgs.map((f) => `<a href="/api/files/${f.id}" target="_blank"><img src="/api/files/${f.id}" alt="${esc(f.name)}" loading="lazy"></a>`).join('')}
-    ${docs.map((f) => `<a class="doc" href="/api/files/${f.id}" target="_blank">📄 ${esc(f.name)}</a>`).join('')}</div>`;
+    ${docs.map((f) => `<a class="doc" href="/api/files/${f.id}" target="_blank">${esc(f.name)}</a>`).join('')}</div>`;
 }
 
 // ---- Toasts and pop-ups ---------------------------------------------------

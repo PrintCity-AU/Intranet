@@ -72,7 +72,7 @@ export async function emergency(el) {
   el.innerHTML = `<div class="page-head"><h1>Emergency</h1>${isManager() ? '<div class="row"><button data-add>Add contact</button><button data-editpage>Edit plan</button></div>' : ''}</div>
     <a class="emergency-call" href="tel:000">Call 000 for police, fire or ambulance</a>
     ${Object.entries(groups).map(([role, list]) => `<h2>${esc(role)}${list.length > 1 && !/service/i.test(role) ? 's' : ''}</h2><div class="list">${list.map((c) => `<div class="item"><div><strong>${esc(c.name)}</strong>${c.notes ? `<div class="muted">${esc(c.notes)}</div>` : ''}</div>
-      <div class="right">${c.phone ? `<a class="button" href="tel:${esc(c.phone.replace(/\s/g, ''))}">📞 ${esc(c.phone)}</a>` : ''}${isManager() ? `<button class="small" data-editc="${c.id}">Edit</button>` : ''}</div></div>`).join('')}</div>`).join('')}
+      <div class="right">${c.phone ? `<a class="button" href="tel:${esc(c.phone.replace(/\s/g, ''))}">Call ${esc(c.phone)}</a>` : ''}${isManager() ? `<button class="small" data-editc="${c.id}">Edit</button>` : ''}</div></div>`).join('')}</div>`).join('')}
     ${page ? `<div class="card pad">${md(page.content)}${fileLinks(page.files)}</div>` : ''}`;
   $('[data-add]', el)?.addEventListener('click', () => editRecord('contacts', {}, { onSaved: () => rerender() }));
   $('[data-editpage]', el)?.addEventListener('click', () => editRecord('pages', page || {}, { title: 'Emergency plan', preset: page ? {} : { slug: 'emergency', title: 'Emergency plan', category: 'Emergency' }, onSaved: () => rerender() }));
@@ -147,6 +147,6 @@ export const handbook = (el, params) => register(el, 'pages', {
 
 export const notices = (el, params) => register(el, 'notices', {
   newLabel: 'Post a notice',
-  row: (r) => ({ title: (r.pinned ? '📌 ' : '') + r.title, sub: `${fmtDate(r.created_at)} · ${esc(userName(r.created_by))}`, right: r.expires && daysUntil(r.expires) < 0 ? badge('Expired', 'mid') : '' }),
+  row: (r) => ({ title: (r.pinned ? 'Pinned: ' : '') + r.title, sub: `${fmtDate(r.created_at)} · ${esc(userName(r.created_by))}`, right: r.expires && daysUntil(r.expires) < 0 ? badge('Expired', 'mid') : '' }),
   skip: ['pinned'],
 }, params);

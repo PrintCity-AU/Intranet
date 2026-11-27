@@ -6,14 +6,14 @@ import { trainingHome, trainingModule, trainingModules } from './views/training.
 import * as safety from './views/safety.js';
 import * as people from './views/people.js';
 
-// [route, label, icon]. "mgr" items only show for managers and admins.
+// [route, label]. "mgr" items only show for managers and admins.
 const NAV = [
-  ['Home', [['home', 'Dashboard', '🏠'], ['notices', 'Noticeboard', '📌']]],
-  ['Safety', [['machines', 'Machinery', '⚙️'], ['training', 'Training', '🎓'], ['hazards', 'Hazards and near misses', '⚠️'], ['incidents', 'Incidents', '🩹'],
-    ['actions', 'Corrective actions', '🔧'], ['prestarts', 'Pre-start checks', '✅'], ['testtag', 'Test and tag', '🔌'], ['chemicals', 'Chemicals and SDS', '🧪'],
-    ['emergency', 'Emergency', '🚨'], ['toolbox', 'Toolbox talks', '🗣️'], ['policies', 'Policies', '📄'], ['licences', 'Licences and tickets', '🪪']]],
-  ['Team', [['directory', 'Staff directory', '👥'], ['org', 'Org chart', '🌳'], ['leave', 'Leave calendar', '🗓️'], ['uniforms', 'Uniforms', '👕'], ['handbook', 'Handbook', '📚']]],
-  ['Admin', [['users', 'Manage people', '🔑', 'admin']]],
+  ['Home', [['home', 'Dashboard'], ['notices', 'Noticeboard']]],
+  ['Safety', [['machines', 'Machinery'], ['training', 'Training'], ['hazards', 'Hazards and near misses'], ['incidents', 'Incidents'],
+    ['actions', 'Corrective actions'], ['prestarts', 'Pre-start checks'], ['testtag', 'Test and tag'], ['chemicals', 'Chemicals and SDS'],
+    ['emergency', 'Emergency'], ['toolbox', 'Toolbox talks'], ['policies', 'Policies'], ['licences', 'Licences and tickets']]],
+  ['Team', [['directory', 'Staff directory'], ['org', 'Org chart'], ['leave', 'Leave calendar'], ['uniforms', 'Uniforms'], ['handbook', 'Handbook']]],
+  ['Admin', [['users', 'Manage people', 'admin']]],
 ];
 
 // Registers accept "#/thing/new" to open the add form, and "#/thing/12" to open a record.
@@ -31,8 +31,8 @@ function routes() {
 
 function drawNav() {
   $('#nav').innerHTML = NAV.map(([group, items]) => {
-    const shown = items.filter(([, , , need]) => !need || (need === 'admin' ? isAdmin() : isManager()));
-    return shown.length ? `<h3>${group}</h3>${shown.map(([r, label, icon]) => `<a href="#/${r}" data-route="${r}"><span>${icon}</span>${esc(label)}</a>`).join('')}` : '';
+    const shown = items.filter(([, , need]) => !need || (need === 'admin' ? isAdmin() : isManager()));
+    return shown.length ? `<h3>${group}</h3>${shown.map(([r, label]) => `<a href="#/${r}" data-route="${r}">${esc(label)}</a>`).join('')}` : '';
   }).join('');
   $('#me').innerHTML = `<a href="#/profile">${esc(state.me.name)}</a>`;
 }

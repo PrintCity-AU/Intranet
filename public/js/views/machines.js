@@ -23,7 +23,7 @@ export async function machinesList(el) {
   const draw = () => {
     const rows = state.machines.filter((m) => (!cat || m.category === cat) && (!q || JSON.stringify([m.name, m.make_model, m.location, m.asset_no]).toLowerCase().includes(q)));
     $('[data-grid]', el).innerHTML = rows.length ? rows.map((m) => `<a class="card machine" href="#/machines/${m.id}">
-        ${m.photo ? `<img src="/api/files/${m.photo.id}" alt="" loading="lazy">` : '<div class="noimg">⚙️</div>'}
+        ${m.photo ? `<img src="/api/files/${m.photo.id}" alt="" loading="lazy">` : '<div class="noimg">No photo</div>'}
         <div class="pad"><strong>${esc(m.name)}</strong><div class="muted">${esc([m.category, m.location].filter(Boolean).join(' · '))}</div>
         <div>${statusBadge(m.status || 'Operational')}</div></div></a>`).join('')
       : `<p class="empty">${state.machines.length ? 'No machines match.' : 'No machines added yet.'}</p>`;
@@ -61,9 +61,9 @@ export async function machineDetail(el, { id }) {
       <p>${statusBadge(status)} ${m.risk_level ? badge(m.risk_level + ' risk', { Low: 'ok', Medium: 'warn', High: 'bad' }[m.risk_level]) : ''}</p></div></div>
     ${authBox}
     <div class="actions-bar">
-      ${(m.prestart_items || []).length ? '<button class="primary big" data-prestart>✅ Pre-start check</button>' : ''}
-      <a class="button big warnbtn" href="#/hazards/new?machine=${m.id}">⚠️ Report a hazard</a>
-      ${active.length ? `<a class="button big" href="#/training/${active[0].id}">🎓 Training</a>` : ''}
+      ${(m.prestart_items || []).length ? '<button class="primary big" data-prestart>Pre-start check</button>' : ''}
+      <a class="button big warnbtn" href="#/hazards/new?machine=${m.id}">Report a hazard</a>
+      ${active.length ? `<a class="button big" href="#/training/${active[0].id}">Training</a>` : ''}
     </div>
     ${m.description ? `<p>${esc(m.description)}</p>` : ''}
     ${section('PPE required', ppeBadges(m.ppe), true)}
@@ -118,7 +118,7 @@ export async function qrLabels(el, { id }) {
   const list = id ? state.machines.filter((m) => m.id === Number(id)) : state.machines;
   el.innerHTML = `<div class="page-head noprint"><h1>QR labels</h1><div class="row"><button class="primary" data-print>Print</button><a class="button" href="#/machines">Back</a></div></div>
     <p class="intro noprint">Print these, laminate them and stick one on each machine. Scanning a label opens that machine's procedures, PPE, pre-start check and hazard report form.</p>
-    <div class="labels">${list.map((m) => `<div class="label"><div class="qr">${qrSvg(machineUrl(m.id))}</div><div><strong>${esc(m.name)}</strong>
+    <div class="labels">${list.map((m) => `<div class="label"><div class="qr">${qrSvg(machineUrl(m.id))}</div><div><img class="label-logo" src="/brand/logo-dark.svg" alt="Print City"><strong>${esc(m.name)}</strong>
       <span>Scan for safe operating procedure, PPE, pre-start check and to report a hazard</span>${m.asset_no ? `<small>Asset ${esc(m.asset_no)}</small>` : ''}</div></div>`).join('') || '<p class="empty">No machines yet.</p>'}</div>`;
   $('[data-print]', el).addEventListener('click', () => window.print());
 }

@@ -10,7 +10,7 @@ export async function directory(el) {
   const people = state.users.filter((u) => u.active);
   el.innerHTML = `<div class="page-head"><h1>Staff directory</h1>${isAdmin() ? '<a class="button" href="#/users">Manage people</a>' : ''}</div>
     <div class="list">${people.map((u) => `<div class="item">${avatar(u)}<div class="grow"><strong>${esc(u.name)}</strong><div class="muted">${esc([u.position, u.department].filter(Boolean).join(' · '))}</div></div>
-      <div class="right">${u.phone ? `<a class="button small" href="tel:${esc(u.phone.replace(/\s/g, ''))}">📞 ${esc(u.phone)}</a>` : ''}<a class="button small" href="mailto:${esc(u.email)}">✉️ Email</a></div></div>`).join('')}</div>`;
+      <div class="right">${u.phone ? `<a class="button small" href="tel:${esc(u.phone.replace(/\s/g, ''))}">Call ${esc(u.phone)}</a>` : ''}<a class="button small" href="mailto:${esc(u.email)}">✉️ Email</a></div></div>`).join('')}</div>`;
 }
 
 export async function orgChart(el) {
@@ -94,7 +94,7 @@ export async function uniforms(el, params) {
     ${isManager() && pending.length ? `<h2>Waiting for approval (${pending.length})</h2><div class="list">${pending.map(orderRow).join('')}</div>` : ''}
     <h2>Order form</h2>
     ${avail.length ? `<form class="form" data-orderform><div class="grid">${avail.map((i) => `<div class="card uniform" data-item="${i.id}">
-        ${i.photo ? `<img src="/api/files/${i.photo.id}" alt="" loading="lazy">` : '<div class="noimg">👕</div>'}
+        ${i.photo ? `<img src="/api/files/${i.photo.id}" alt="" loading="lazy">` : '<div class="noimg">No photo</div>'}
         <div class="pad"><strong>${esc(i.name)}</strong><div class="muted">${esc(i.description || '')}${i.price ? ' · ' + money(i.price) : ''}</div>
         <div class="row">${(i.sizes || []).length ? `<select data-size aria-label="Size"><option value="">Size</option>${i.sizes.map((s) => `<option>${esc(s)}</option>`).join('')}</select>` : ''}
         <input type="number" min="0" max="20" value="0" data-qty aria-label="Quantity"></div></div></div>`).join('')}</div>
