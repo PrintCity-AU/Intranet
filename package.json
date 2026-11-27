@@ -1,0 +1,12 @@
+{
+  "name": "printcity-intranet",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public --d1 DB --r2 FILES --port 8788",
+    "test": "node test/auth.mjs && node test/smoke.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
